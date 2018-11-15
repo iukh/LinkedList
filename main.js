@@ -1,7 +1,3 @@
-/*
-you should implement data structure called Linked list (in can be doubly linked or singly linked)
-and all methods that listed below
-*/
 class Node {
   constructor(value,next) {
     this.value = value;
@@ -147,11 +143,26 @@ class LinkedList {
     this.toString();
   }
 
+  //  each method. Returns element from position
+  each(position) {
+    if (position > this.length-1) {
+      console.log('Error: there is no element on such position');
+    } else {
+      let i = 0;
+      let currentObj = this.list;
+      while (i < position){
+        currentObj=currentObj.next;
+        i++;
+      }
+      return currentObj;
+    }
+  }
+
   // additional method to display the result
   toString() {
     let arr =[];
     for (let i = 0; i < this.length; i++) {
-      arr[i]=this.get(i);
+      arr[i]=this.each(i).value;
       if (typeof arr[i] == "string") {
         arr[i] = '"' + arr[i] + '"';
       }
@@ -168,40 +179,11 @@ class LinkedList {
     console.log("");
   }
 
-  //  each method. Returns element from position
-  each(position) {
-    if (position > this.length-1) {
-      console.log('Error: there is no element on such position');
-    } else {
-      let i = 0;
-      let currentObj = this.list;
-      while (i < position){
-        currentObj=currentObj.next;
-        i++;
-      }
-      console.log(currentObj);
-    }
-  }
-
-  get(value) {
-    if (value>this.length-1) {
-      console.log('Error: there is no such element');
-    } else {
-      var i =0;
-      var currentObj = this.list;
-      while (i<value){
-        currentObj=currentObj.next;
-        i++;
-      }
-      return currentObj.value;
-    }
-  }
-
   forEach(callback) {
     var currentObj= this.list;
     var arr =[];
     for (var i = 0; i < this.length; i++) {
-      arr[i]=this.get(i);
+      arr[i]=this.each(i).value;
     }
     return Array.prototype.forEach.call(arr,callback);
   }
@@ -236,7 +218,7 @@ console.log("%cMETHOD: List.reverse();","color:green;font-weight:bold;");
 List.reverse();
 console.log("%cTASK: Returns element from position.","color:blue;font-weight:bold;");
 console.log("%cMETHOD: List.each(3);","color:green;font-weight:bold;");
-List.each(3);
+console.log(List.each(3));
 
 // console.log("%cTASK: forEach method METHOD: list.forEach((element, index, array) => console.log(element));","color:blue; font-weight:bold;");
 // List.forEach((element, index, array) => console.log(element));
