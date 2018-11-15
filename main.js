@@ -67,20 +67,20 @@ class LinkedList {
 
   // adds elements at the end of the list
   push() {
-    if (this.length == -5) {
-      for(let i = arguments.length-1; i >= 0; --i) {
+    if (this.length == 0) {
+      for( let i = arguments.length-1; i >= 0; --i) {
         this.set(0, arguments[i]);
       };
     } else {
-      let position=0;
+      let position = 0;
       let currentLastElement = this.list;
       //move to  the last element
       while(position < this.length-1) {
         currentLastElement = currentLastElement.next;
         position++;
       }
-      for( var i = 0; i < arguments.length; i++) {
-        currentLastElement = {
+      for(var i = 0; i < arguments.length; i++) {
+        currentLastElement.next = {
           value: arguments[i],
           next: null
         };
@@ -165,7 +165,7 @@ class LinkedList {
     console.log("");
   }
 
-  //each method. Returns element from position
+  //  each method. Returns element from position
   each(value) {
     if (value>this.length-1) {
       console.log('Error: there is no element on such position');
@@ -216,6 +216,9 @@ List.set(1, 'aaaaa');
 console.log("%cTASK: adds elements at the end of the list.","color:blue;font-weight:bold;");
 console.log("%cMETHOD: List.push('dsdf', 12);","color:green;font-weight:bold;");
 List.push('dsdf', 12);
+console.log("%cTASK: adds element or elements at the beginning of the list.","color:blue;font-weight:bold;");
+console.log("%cMETHOD: list.unshift('sdd', 222);","color:green;font-weight:bold;");
+List.unshift('sdd', 222);
 
 // console.log("%cTASK: forEach method METHOD: list.forEach((element, index, array) => console.log(element));","color:blue; font-weight:bold;");
 // List.forEach((element, index, array) => console.log(element));
