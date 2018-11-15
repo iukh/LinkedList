@@ -157,7 +157,15 @@ class LinkedList {
       return currentObj;
     }
   }
-
+//
+  forEach(callback) {
+    let currentObj= this.list;
+    let arr =[];
+    for (let i = 0; i < this.length; i++) {
+      arr[i]=this.each(i).value;
+    }
+    return Array.prototype.forEach.call(arr,callback);
+  }
   // additional method to display the result
   toString() {
     let arr =[];
@@ -176,66 +184,38 @@ class LinkedList {
     }
     let stringArray = arr.join(', ')
     console.log("Current List: [" + stringArray + "]");
-    console.log("");
-  }
-
-  forEach(callback) {
-    var currentObj= this.list;
-    var arr =[];
-    for (var i = 0; i < this.length; i++) {
-      arr[i]=this.each(i).value;
-    }
-    return Array.prototype.forEach.call(arr,callback);
   }
 }
 console.log("%cMETHOD: new LinkedList(11,'123',{ 'a': 'abc'});","color:green;font-weight:bold;");
 let List = new LinkedList(11,"123",{ "a": "abc"});
 List.toString();
-console.log("%cTASK: to remove last element from the list.","color:blue;font-weight:bold;");
+console.log("%cTASK: remove last element from the list.","color:blue;font-weight:bold;");
 console.log("%cMETHOD: List.pop();","color:green;font-weight:bold;");
 List.pop();
 List.toString();
 console.log("%cTASK: set an element to specific position.","color:blue; font-weight:bold;");
 console.log("%cMETHOD: List.set(1, 'aaaaa')","color:green; font-weight:bold;");
 List.set(1, 'aaaaa');
-console.log("%cTASK: adds elements at the end of the list.","color:blue;font-weight:bold;");
+console.log("%cTASK: add elements at the end of the list.","color:blue;font-weight:bold;");
 console.log("%cMETHOD: List.push('dsdf', 12);","color:green;font-weight:bold;");
 List.push('dsdf', 12);
 console.log("%cTASK: add elements at the beginning of the list.","color:blue;font-weight:bold;");
 console.log("%cMETHOD: List.unshift('sdd', 222);","color:green;font-weight:bold;");
 List.unshift('sdd', 222);
-console.log("%cTASK: remove first element from the list.","color:blue;font-weight:bold;");
+console.log("%cTASK: remove the first element from the list.","color:blue;font-weight:bold;");
 console.log("%cMETHOD: List.shift();","color:green;font-weight:bold;");
 List.shift();
-console.log("%cTASK: Contains, returns boolean.","color:blue;font-weight:bold;");
-console.log("%cMETHOD: list.contains('222');","color:green;font-weight:bold;");
+console.log("%cTASK: Contains element in the list, returns boolean.","color:blue;font-weight:bold;");
+console.log("%cMETHOD: List.contains('222');","color:green;font-weight:bold;");
 List.contains('222');
-console.log("%cMETHOD: list.contains('error');","color:green;font-weight:bold;");
+console.log("%cMETHOD: List.contains('error');","color:green;font-weight:bold;");
 List.contains('error');
-console.log("");
-console.log("%cTASK: reverse list.","color:blue;font-weight:bold;");
+console.log("%cTASK: reverse the list.","color:blue;font-weight:bold;");
 console.log("%cMETHOD: List.reverse();","color:green;font-weight:bold;");
 List.reverse();
-console.log("%cTASK: Returns element from position.","color:blue;font-weight:bold;");
+console.log("%cTASK: return element from position.","color:blue;font-weight:bold;");
 console.log("%cMETHOD: List.each(3);","color:green;font-weight:bold;");
 console.log(List.each(3));
-
-// console.log("%cTASK: forEach method METHOD: list.forEach((element, index, array) => console.log(element));","color:blue; font-weight:bold;");
-// List.forEach((element, index, array) => console.log(element));
-// List.each(1);
-// console.log("%cTASK: adds element or elements at the end of the list. METHOD: list.push('dsdf', 12);","color:blue;font-weight:bold;");
-// List.push('dsdf', 12);
-//
-
-// console.log("%cTASK: adds element or elements at the beginning of the list.","color:blue;font-weight:bold;");
-// console.log("%cMETHOD: list.unshift('sdd', 222);","color:green;font-weight:bold;");
-// List.unshift('sdd', 222);
-//
-// console.log("%cTASK: removes first element from the list.","color:blue;font-weight:bold;");
-// console.log("%cMETHOD: list.shift();","color:blue;font-weight:bold;");
-// List.shift();
-//
-//
-// console.log("%cTASK: reverse list.","color:blue;font-weight:bold;");
-// console.log("%cMETHOD: List.reverse();","color:green;font-weight:bold;");
-// List.reverse();
+console.log("%cTASK: forEach method;","color:blue; font-weight:bold;");
+console.log("%cMETHOD: List.forEach((element, index, array) => console.log(element));","color:green; font-weight:bold;");
+List.forEach((element, index, array) => console.log(element));
