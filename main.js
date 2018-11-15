@@ -21,7 +21,6 @@ class LinkedList {
     if (this.length == 0) {
       console.log('Error: It is impossible to remove element. The list is empty')
     } else {
-      let position = 0;
       let currentObj = this.list;
       if (this.length == 1) {
         var delElement = currentObj.value;
@@ -29,10 +28,7 @@ class LinkedList {
         currentObj.next = null;
       } else {
         //move to the penultimate element
-        while (position < this.length - 2) {
-          currentObj = currentObj.next;
-          position++;
-        };
+        currentObj = this.each(this.length-2);
         var delElement = currentObj.next.value;
         currentObj.next = null;
       }
@@ -47,12 +43,8 @@ class LinkedList {
       this.push(value);
     } else {
       let currentElement = this.list;
-      //move to element with position-1
-      let i=0;
-      while(i < position) {
-        currentElement = currentElement.next;
-        i++;
-      }
+      //select element with position-1
+      currentElement = this.each(position);
       let saveCurrentElement = new Node(currentElement.value, currentElement.next );
       currentElement.value = value;
       currentElement.next = saveCurrentElement;
@@ -68,13 +60,9 @@ class LinkedList {
         this.set(0, arguments[i]);
       };
     } else {
-      let position = 0;
       let currentLastElement = this.list;
       //move to  the last element
-      while(position < this.length-1) {
-        currentLastElement = currentLastElement.next;
-        position++;
-      }
+      currentLastElement = this.each(this.length-1);
       for(var i = 0; i < arguments.length; i++) {
         currentLastElement.next = {
           value: arguments[i],
@@ -95,7 +83,6 @@ class LinkedList {
       this.set(0,arguments[i]);
     }
   }
-
 
   //remove the first element from list
   shift() {
