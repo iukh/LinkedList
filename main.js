@@ -92,34 +92,37 @@ class LinkedList {
     }
   }
 
+  //add elements at the beginning of the list
   unshift() {
-    for(var i=arguments.length-1;i>=0;--i) {
-      console.log(arguments[i] +" element is added to LinkedList");
+    for (let i = arguments.length - 1; i >= 0; --i) {
+      console.log(arguments[i] + " element is added to LinkedList");
       this.set(0,arguments[i]);
     }
   }
 
+
+  //remove the first element from list
   shift() {
-    if (this.length==0){
+    if (this.length == 0){
       console.log('Error: It is impossible to remove element. The list is empty')
     } else {
-      var currentElement= this.list;
+      let currentElement = this.list;
       let delElement = currentElement.value;
-      this.list=currentElement.next;
+      this.list = currentElement.next;
       currentElement = {};
       this.length--;
       console.log(delElement+" element is removed from LinkedList");
-      console.log(this.toString());
-      return delElement;
+      this.toString();
     }
   }
 
   contains(value) {
-    var flag =false;
-    var i =0;
+    let flag =false;
+    let i =0;
     var  currentObj = this.list;
-    while (i<this.length){
-      if (currentObj.value == value) { flag=true; break;}
+    while (i < this.length){
+      if (currentObj.value == value)
+      flag=true; break;
       currentObj = currentObj.next;
       i++;
     }
@@ -127,52 +130,52 @@ class LinkedList {
   }
 
   reverse() {
-    var arr =[];
-    for (var i = 0; i < this.length; i++) {
-      arr[i]=this.get(i);
+    if (this.length > 1) {
+      var  currentElement = this.list; //a
+      var nextElement = currentElement.next; //b
+      var tmpElement = nextElement.next; //c
+      for (let i = 0; i < this.length - 1; i++) {
+        if (i==0) currentElement.next = null;
+        nextElement.next = currentElement;
+        currentElement = nextElement;
+        nextElement = tmpElement;
+        if (tmpElement !== null )
+        tmpElement  = tmpElement.next;
+      }
+      this.list = currentElement;
     }
-    arr.reverse();
-    this.length = 0;
-    this.list = null;
-    let obj = {next: null};
-    for(var i=arr.length;i;--i) {
-      obj.value = arr.pop();
-      obj = {next: obj};
-      this.length++;
-    }
-    obj=obj.next;
-    this.list =obj;
-    return this.toString()
+    this.toString();
   }
+
   // additional method to display the result
   toString() {
     let arr =[];
-    for (var i = 0; i < this.length; i++) {
+    for (let i = 0; i < this.length; i++) {
       arr[i]=this.get(i);
       if (typeof arr[i] == "string") {
         arr[i] = '"' + arr[i] + '"';
       }
       if (typeof arr[i] == "object") {
-        var b = "";
+        let b = "";
         for( let p in arr[i]) {
           b = b + p + ": " + arr[i][p];
         }
         arr[i] = "{" + b + "}";
       }
     }
-    var stringArray = arr.join(', ')
+    let stringArray = arr.join(', ')
     console.log("Current List: [" + stringArray + "]");
     console.log("");
   }
 
   //  each method. Returns element from position
-  each(value) {
-    if (value>this.length-1) {
+  each(position) {
+    if (position > this.length-1) {
       console.log('Error: there is no element on such position');
     } else {
-      var i =0;
-      var currentObj = this.list;
-      while (i<value){
+      let i = 0;
+      let currentObj = this.list;
+      while (i < position){
         currentObj=currentObj.next;
         i++;
       }
@@ -216,9 +219,24 @@ List.set(1, 'aaaaa');
 console.log("%cTASK: adds elements at the end of the list.","color:blue;font-weight:bold;");
 console.log("%cMETHOD: List.push('dsdf', 12);","color:green;font-weight:bold;");
 List.push('dsdf', 12);
-console.log("%cTASK: adds element or elements at the beginning of the list.","color:blue;font-weight:bold;");
-console.log("%cMETHOD: list.unshift('sdd', 222);","color:green;font-weight:bold;");
+console.log("%cTASK: add elements at the beginning of the list.","color:blue;font-weight:bold;");
+console.log("%cMETHOD: List.unshift('sdd', 222);","color:green;font-weight:bold;");
 List.unshift('sdd', 222);
+console.log("%cTASK: remove first element from the list.","color:blue;font-weight:bold;");
+console.log("%cMETHOD: List.shift();","color:green;font-weight:bold;");
+List.shift();
+console.log("%cTASK: Contains, returns boolean.","color:blue;font-weight:bold;");
+console.log("%cMETHOD: list.contains('222');","color:green;font-weight:bold;");
+List.contains('222');
+console.log("%cMETHOD: list.contains('error');","color:green;font-weight:bold;");
+List.contains('error');
+console.log("");
+console.log("%cTASK: reverse list.","color:blue;font-weight:bold;");
+console.log("%cMETHOD: List.reverse();","color:green;font-weight:bold;");
+List.reverse();
+console.log("%cTASK: Returns element from position.","color:blue;font-weight:bold;");
+console.log("%cMETHOD: List.each(3);","color:green;font-weight:bold;");
+List.each(3);
 
 // console.log("%cTASK: forEach method METHOD: list.forEach((element, index, array) => console.log(element));","color:blue; font-weight:bold;");
 // List.forEach((element, index, array) => console.log(element));
@@ -235,12 +253,6 @@ List.unshift('sdd', 222);
 // console.log("%cMETHOD: list.shift();","color:blue;font-weight:bold;");
 // List.shift();
 //
-// console.log("%cTASK: Contains, returns boolean.","color:blue;font-weight:bold;");
-// List.toString();
-// console.log("%cMETHOD: list.contains('222');","color:green;font-weight:bold;");
-// List.contains('222');
-// console.log("%cMETHOD: list.contains('error');","color:green;font-weight:bold;");
-// List.contains('error');
 //
 // console.log("%cTASK: reverse list.","color:blue;font-weight:bold;");
 // console.log("%cMETHOD: List.reverse();","color:green;font-weight:bold;");
